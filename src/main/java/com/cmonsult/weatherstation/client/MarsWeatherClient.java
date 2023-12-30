@@ -4,6 +4,7 @@ import com.cmonsult.weatherstation.model.MarsWeatherData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,5 +23,11 @@ public class MarsWeatherClient {
         // Handle any parsing exceptions and return the data
         return null;
     }
+
+    @Scheduled(cron = "@daily") // Or use fixedRate or fixedDelay as per your requirement
+    public void updateWeatherData() {
+        // Code to fetch and update weather data daily
+    }
+
 }
 

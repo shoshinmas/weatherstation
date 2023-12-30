@@ -1,4 +1,6 @@
 package com.cmonsult.weatherstation.service;
 
-public class WeatherService {
+public interface WeatherService<T> {
+    T getWeatherData();
 }
+
