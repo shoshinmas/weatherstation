@@ -1,6 +1,7 @@
 package com.cmonsult.weatherstation.client;
 
 import com.cmonsult.weatherstation.model.LocalWeatherData;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +30,20 @@ public class LocalWeatherClient {
     public LocalWeatherData getLocalWeatherData() {
         String urlWithParams = localWeatherApiUrl + "?latitude=" + latitude + "&longitude=" + longitude + "&" + params;
         ResponseEntity<String> response = restTemplate.getForEntity(urlWithParams, String.class);
-        // Parse the JSON from response.getBody() to LocalWeatherData
-        // Handle any parsing exceptions and return the data
+
+        if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                // Parse JSON into LocalWeatherData object
+                LocalWeatherData localWeatherData = objectMapper.readValue(response.getBody(), LocalWeatherData.class);
+                return localWeatherData;
+            } catch (Exception e) {
+                // Handle parsing exception (e.g., log the error)
+                e.printStackTrace();
+            }
+        }
+
+        // Return null if there was an error or no response
         return null;
     }
 

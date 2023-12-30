@@ -1,14 +1,29 @@
 package com.cmonsult.weatherstation.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
 public class WeatherData {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     // Common attributes, e.g., min and max temperature, pressure
     private LocalDate date;
     private double minTemp;
     private double maxTemp;
     private double pressure;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 
     public LocalDate getDate() {

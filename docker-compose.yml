@@ -1,0 +1,6 @@
+version: '3.8'
+services:
+  weatherstation-app:
+    image: shoshinmas69/weatherstation
+    ports:
+      - "8080:8080"

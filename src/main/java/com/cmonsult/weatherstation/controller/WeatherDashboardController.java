@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("/weather") // Add a base path for the controller
 public class WeatherDashboardController {
+
     @Autowired
     private MarsWeatherServiceImpl marsWeatherService;
 
