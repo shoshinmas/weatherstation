@@ -56,6 +56,5 @@ public class LocalWeatherData extends WeatherData {
         this.uvIndexMax = uvIndexMax;
     }
 
-
 }
 
